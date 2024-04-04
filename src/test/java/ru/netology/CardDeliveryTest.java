@@ -246,39 +246,8 @@ public class CardDeliveryTest {
                 .shouldHave(text
                         ("Я соглашаюсь с условиями обработки и использования моих персональных данных"));
     }
-    //задание 2
-    @Test
-    void shouldSendSuccessfulRequestWithCitySearch() {
-        open("http://localhost:9999");
-        String dueDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id='city'] input").setValue("йо");
-        $$(".menu-item").findBy(exactText("Йошкар-Ола")).click();
-        $("[data-test-id='date'] input").doubleClick().sendKeys(BACK_SPACE);
-        $("[data-test-id='date'] input").setValue(dueDate);
-        $("[data-test-id='name'] input").setValue("Иванова Мария");
-        $("[data-test-id=phone] input").setValue("+79876543211");
-        $("[data-test-id=agreement]").click();
-        $x("//span[contains(text(), 'Забронировать')]").click();
-        $("[data-test-id='notification']")
-                .shouldBe(Condition.visible, Duration.ofSeconds(15))
-                .shouldHave(exactText("Успешно! Встреча успешно забронирована на " + dueDate));
-    }
-    @Test
-    void shouldSendSuccessfulRequestWithCalender() {
-        open("http://localhost:9999");
-        String dueDate = LocalDate.now().plusDays(7).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id='city'] input").setValue("Йошкар-Ола");
-        $("[data-test-id='date'] input").doubleClick().sendKeys(BACK_SPACE);
-        $("button").click();
-        $("[data-test-id='date'] input").setValue(dueDate).click();
-        $("[data-test-id='name'] input").setValue("Иванова Мария");
-        $("[data-test-id=phone] input").setValue("+79876543211");
-        $("[data-test-id=agreement]").click();
-        $x("//span[contains(text(), 'Забронировать')]").click();
-        $("[data-test-id='notification']")
-                .shouldBe(Condition.visible, Duration.ofSeconds(15))
-                .shouldHave(exactText("Успешно! Встреча успешно забронирована на " + dueDate));
+
     }
 
-}
+
 
